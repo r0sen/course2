@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
+  <title>Bookstore</title>
+ </head>
+ <body>
+<div class="home">
+  <div id="bookstore">
+    <a href="/"><img class="bookstoreImg" alt="bookstore" src="../pics/bookstore-logo.jpg"></a>
+  </div>
+  <div id="logInField"><form method="post">
+  <div class="loginForm">
+    <label>Login:</label>
+    <input type="text" name="login" class="login">
+  </div>
+  <div class="loginForm">
+    <label>Password:</label>
+    <input type="text" name="password" class="password">
+  </div>
+  <div class="loginForm">
+    <a class="loginLink" href="forgotpassword">Forgot account?</a>
+    <a class="loginLink" href="signup">Registration</a>
+    <input type="submit" value="Sign In">
+  </div>
+  </form>
+</div>
+</div>
+<div class="content">
+  <div class="left-toolbar">
+    <div id="search"><form>
+   <input type="search" name="Search" placeholder="Search">
+   <input type="submit" value="Search"></div>
+    <div id="contacts">
+      <div id="about-us">
+        <a href="about">About Us</a>
+      </div>
+    </div>
+    <div id="basket">
+        <div id="basketId">
+          <a href="basket">Basket</a>
+          <img class="basketImg" alt='basketImg' src="../pics/basket.png" width="20px" lenght="20px">
+        </div>
+    </div>
+  </div>
+  <div id="products">
+    <% for (let i = 0; i < arr.length; i++) {  %>
+      <div class="product"><a href="http://google.ua" class="productLink"><img class="imgLink" alt="<%= arr[i].name %>" src="<%=arr[i].image%>" width="85%" lenght="85%"><%= arr[i].name %></a></div>
+    <%}%>
+  </div>
+</div>
+<div id="footer_line">
+  <p id="co">by Medvedskyi Denys 2016</p>
+</div>
+</body>
+</html>
