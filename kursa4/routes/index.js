@@ -12,7 +12,8 @@ router.get('/', function(req, res, next) {
       let myBook = books[i];
       arr.push({
         "name": myBook.title,
-        "image": myBook.image_url
+        "image": myBook.image_url,
+		"link": "/"+myBook._id
       });
     };
     console.log(arr);
@@ -49,5 +50,24 @@ router.post('/signup', function(req, res) {
     }
     res.render('success');
 });
-
+router.get('/:_id', function(req, res, next) {
+  Book.getBookById(req.params._id, function(err, book){
+    if (err){
+      throw err;
+    }
+    res.render('book', { 
+	title: book.title,
+    genre: book.genre,
+    description: book.description,
+    author: book.author,
+    publisher: book.publisher,
+    pages: book.pages,
+    image_url: book.image_url,
+    price: book.price,
+    release_date: book.release_date,
+    age_limit: book.age_limit,
+    language: book.language,
+  });
+});
+});
 module.exports = router;
