@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   var arr = []; // array of my books
   Book.getBooks(function(err, books){
     if (err){
-      throw err;
+    res.render('error');
     }
     for (let i = 0; i < books.length; i++){
       let myBook = books[i];
@@ -16,9 +16,9 @@ router.get('/', function(req, res, next) {
 		"link": "/"+myBook._id
       });
     };
-    console.log(arr);
+
     res.render('index', { arr: arr });
-	    console.log(arr);
+
   });
 });
 
@@ -29,11 +29,13 @@ router.get('/signup', function(req, res, next) {
 router.get('/about', function(req, res, next) {
   res.render('about');
 });
-
+router.get('/users/account', function(req, res, next) {
+  res.render('users');
+});
 router.post('/', function(req, res) {
     var login = req.body.login;
     var password = req.body.password;
-    console.log("User sent: login: "+login+"; password: "+password);
+    console.log("User income: login: "+login+"; password: "+password);
     res.render('index');
 });
 
@@ -43,20 +45,20 @@ router.post('/signup', function(req, res) {
     var email = req.body.email;
     var regPassword1 = req.body.regPassword1;
     var regPassword2 = req.body.regPassword2;
-    var sex = req.body.sex;
-    console.log("User sent: firstname: "+firstname+"; lastname: "+lastname+"; email: "+email+"; password1: "+regPassword1+"; password2: "+regPassword2+"; sex: "+sex);
+
+    console.log("User sent: firstname: "+firstname+"; lastname: "+lastname+"; email: "+email+"; password1: "+regPassword1+"; password2: "+regPassword2);
     if(regPassword1!==regPassword2){
       //error
     }
-    res.render('success');
+
 });
 router.get('/:_id', function(req, res, next) {
   Book.getBookById(req.params._id, function(err, book){
     if (err){
-      throw err;
+      res.render('error');
     }
-    res.render('book', { 
-	title: book.title,
+    res.render('book', {
+	  title: book.title,
     genre: book.genre,
     description: book.description,
     author: book.author,
@@ -66,7 +68,7 @@ router.get('/:_id', function(req, res, next) {
     price: book.price,
     release_date: book.release_date,
     age_limit: book.age_limit,
-    language: book.language,
+    language: book.language
   });
 });
 });

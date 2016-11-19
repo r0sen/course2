@@ -115,7 +115,7 @@ a:hover {
    min-height: 400px;
  }
 .product {
-width: 265px;
+width: 250px;
 height: 360px;
   float: left;
   border: solid 0.5px #FFFFFF;
@@ -124,7 +124,7 @@ height: 360px;
 }
 .imgLink {
 float: left; 
-width: 265px;
+width: 250px;
 height: 325px; 
 position: relative;
 }

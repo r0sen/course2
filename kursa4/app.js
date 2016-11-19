@@ -9,10 +9,66 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var api = require('./routes/api');
 var mongoose = require('mongoose');
-//  , LocalStrategy = require('passport-local').Strategy;
+var app = express();
+//****** PASSPORT------------------------------
+var passport       = require('passport');
+var LocalStrategy  = require('passport-local').Strategy;
+User = require("./routes/models/user");
+
+var mongo = require("mongodb");
+//*Express- Validator---------------------------------------------------------------------
+
+var expressValidator = require("express-validator");
+var flash = require("connect-flash");
+var session = require("express-session");
+
+
+var users = require('./routes/users');
+
+
+app.use(session({
+  secret: 'dafnie',
+  saveUninitialized: true,
+  resave: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
+
+app.use(flash());
+
+app.use(function (req, res, next){
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  res.locals.user = req.user || null;
+  next();
+});
+
+
+
+
+//---------------------------------------------------------------------------------------
 mongoose.connect('mongodb://localhost/bookie');
 var db = mongoose.connection;
-var app = express();
+
 
 ////////////////////////////////////////////////////////////
 Genre =require('./routes/models/genre');
@@ -37,7 +93,7 @@ app.use('/users', users);
 app.use('/api', api);
 //----------------------------------------------------------
 //app.get('/', function(req, res) {
-  
+
   //  res.render('about', { title: 'CCCCCCC' });
 	//res.send('Hello');
 	//res.json({});

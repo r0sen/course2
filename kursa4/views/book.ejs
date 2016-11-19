@@ -8,23 +8,23 @@
  <body>
 <!-- Special part start -->
 <div class="content">
-  <div id="currentDrug">
-    <div id="upperside">
+  <div id="datBook">
+    <div id="upper">
    <img class="currentImg" alt='<%= title %>' src="<%= image_url %>" width="300px" lenght="300px">
-   <div id="rightside">
+   <div id="right">
      <label><%= title %></label>
      <br>
-     <label><%= price %></label>
+     <label>$<%= price %></label>
    </div>
  </div>
-   <div id="bottomside">
+   <div id="Content">
      <p>title: <%= title %><br>
      genre: <%= genre %><br>
      description: <%= description %><br>
      author: <%= author %><br>
      publisher: <%= publisher %><br>
      pages: <%= pages %><br>
-     price: <%= price %><br>
+     price: $<%= price %><br>
      release_date: <%= release_date %><br>
      age_limit: <%= age_limit %><br>
      language: <%= language %><br>
@@ -33,8 +33,8 @@
  </div>
 </div>
 <!-- Special part ends -->
-<div id="bottomOfSite">
-  <p id="rights">by Medvedskyi Denys 2016</p>
+<div id="footter">
+  <p id="copyrights">by Medvedskyi Denys 2016</p>
 </div>
 </body>
 </html>

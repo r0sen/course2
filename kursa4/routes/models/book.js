@@ -26,7 +26,16 @@ var bookSchema = mongoose.Schema({
 	image_url:{
 		type: String
 	},
-	buy_url:{
+	price:{
+		type: String
+	},
+	release_date:{
+		type: String
+	},
+	age_limit:{
+		type: String
+	},
+	language:{
 		type: String
 	},
 	create_date:{
@@ -63,7 +72,10 @@ module.exports.updateBook = function(id, book, options, callback){
 		publisher: book.publisher,
 		pages: book.pages,
 		image_url: book.image_url,
-		buy_url: book.buy_url
+		price: book.price,
+    release_date: book.release_date,
+    age_limit: book.age_limit,
+    language: book.language
 	}
 	Book.findOneAndUpdate(query, update, options, callback);
 }
