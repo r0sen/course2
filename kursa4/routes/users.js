@@ -99,7 +99,61 @@ router.post('/register', function(req, res) {
       res.redirect('login');
     };
 });
+router.post('/adminmenu', function(req, res) {
+console.log("HERE");
+    var title = req.body.title;
+    var genre = req.body.genre;
+    var description = req.body.description;
+    var author = req.body.author;
+    var publisher = req.body.publisher;
+    var pages = req.body.pages;
+    var price = req.body.price;
+    var release_date = req.body.release_date;
+    var age_limit = req.body.age_limit;
+    var language = req.body.language;
+console.log("HERE");
+//console.log("User sent: title: "+title+"; genre: "+genre+"; description: "+description+"; author: "+author+"; publisher: "+publisher+"; password2: "+confirmPassword);
+    //validation
+    req.checkBody('title', 'title is required').notEmpty();
+    req.checkBody('genre', 'genre is required').notEmpty();
+    req.checkBody('description', 'description is required').notEmpty();
+    req.checkBody('author', 'author is required').notEmpty();
+    req.checkBody('publisher', 'publisher is required').notEmpty();
+    req.checkBody('pages', 'pages is required').notEmpty();
+    req.checkBody('price', 'price is required').notEmpty();
+    req.checkBody('release_date', 'release_date is required').notEmpty();
+    req.checkBody('age_limit', 'age_limit is required').notEmpty();
+    req.checkBody('language', 'language is required').notEmpty();
 
+
+console.log("HERE");
+    var errors = req.validationErrors();
+console.log("HERE");
+    if(errors){
+      res.render('adminmenu', {errors: errors});
+    }else{
+      var newBook = new Book({
+        title: title,
+        genre: genre,
+        description: description,
+        author: author,
+        publisher: publisher,
+        pages: pages,
+        price: price,
+        release_date: release_date,
+        age_limit: age_limit,
+        language: language
+      });
+console.log("HERE");
+      Book.addBook(newBook, function(err, book){
+        if(err) throw err;
+        console.log(book);
+      });
+
+      req.flash('success_msg', 'You are registred and now can log in');
+      res.redirect('adminmenu');
+    };
+});
 passport.use(new LocalStrategy(
   function(username, password, done) {
     User.getUserByUsername(username, function(err, user){
@@ -137,8 +191,18 @@ router.post('/login',
 
 router.get('/logout', function(req, res){
   req.logout();
-  req.flash('success_msg', "Ypu are logged out");
+  req.flash('success_msg', "You are logged out");
   res.redirect('/users/login');
 });
+router.get('/adminmenu', ensureAuthenticated, function(req, res, next) {
 
+//  console.log("HERE");
+  //  console.log(req.user);
+  if (req.user.admin == true){
+//  console.log("HERE2");
+    res.render('adminmenu');}
+
+     else res.render('error');
+
+});
 module.exports = router;

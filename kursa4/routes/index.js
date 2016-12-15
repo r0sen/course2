@@ -7,6 +7,7 @@ router.get('/', function(req, res, next) {
   Book.getBooks(function(err, books){
     if (err){
     res.render('error');
+    return;
     }
     for (let i = 0; i < books.length; i++){
       let myBook = books[i];
@@ -56,6 +57,7 @@ router.get('/:_id', function(req, res, next) {
   Book.getBookById(req.params._id, function(err, book){
     if (err){
       res.render('error');
+      return;
     }
     res.render('book', {
 	  title: book.title,

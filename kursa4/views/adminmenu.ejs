@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="../css/index.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
+  <title>Register</title>
+</head>
+<body>
+  <div class="home">
+    <div id="bookstore">
+      <a href="/"><img class="bookstoreImg" alt="bookstore" src="../pics/bookstore-logo.jpg"></a>
+    </div>
+  </div>
+  <div class="regContent">
+    <form method="post" accept-charset="UTF-8">
+      <div id="regInsideContent">
+      <div class="regField">
+        <label>Title:</label>
+        <input type="text" name="title">
+      </div>
+      <div class="regField">
+        <label>Genre:</label>
+        <input type="text" name="genre">
+      </div>
+      <div class="regField">
+        <label>Description:</label>
+        <input type="text" name="description">
+      </div>
+      <div class="regField">
+        <label>Author:</label>
+        <input type="text" name="author">
+      </div>
+      <div class="regField">
+        <label>Publisher:</label>
+        <input type="text" name="publisher">
+      </div>
+      <div class="regField">
+        <label>Pages:</label>
+        <input type="text" name="pages">
+      </div>
+      <div class="regField">
+        <label>image_url:</label>
+        <input type="text" name="image_url">
+      </div>
+      <div class="regField">
+        <label>Price:</label>
+        <input type="text" name="price">
+      </div>
+      <div class="regField">
+        <label>release_date:</label>
+        <input type="text" name="release_date">
+      </div>
+      <div class="regField">
+        <label>age_limit:</label>
+        <input type="text" name="age_limit">
+      </div>
+
+      <div class="regField">
+        <label>language :</label>
+        <input type="text" name="language">
+      </div>
+
+        </div>
+      <div class="regField">
+        <input id="submitButt" type="submit" value="Add book!">
+      </div>
+    </form>
+<br>
+            <a href="/users/login" id="loginLink"><div>Log in</div></a>
+                            <a href="/">Home</a>
+    <p>
+    </p>
+
+    <% if(typeof errors != 'undefined'){ %>
+    <% errors.forEach(function(elements){ %>
+    <div class="alert alert-danger"><%= elements.msg %></div>
+    <%}); %>
+    <%} %>
+
+    <div class="row">
+      <% if(typeof success_msg != 'undefined'){ %>
+        <div class="alert alert-success"><%= success_msg %></div>
+      <%} %>
+      <% if(typeof error_msg != 'undefined'){ %>
+        <div class="alert alert-success"><%= error_msg %></div>
+      <%} %>
+      <% if(typeof error != 'undefined'){ %>
+        <div class="alert alert-success"><%= error %></div>
+      <%} %>
+    </div>
+
+  </div>
+  <div id="footter">
+    <p id="copyrights">by Medvedskyi Denys 2016</p>
+  </div>
+</body>
+</html>
