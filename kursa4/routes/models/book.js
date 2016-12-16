@@ -85,3 +85,7 @@ module.exports.removeBook = function(id, callback){
 	var query = {_id: id};
 	Book.remove(query, callback);
 }
+module.exports.searchBookByName = function(title,callback,limit){
+  var query = {'title' : new RegExp('^'+title,"i")}
+  Book.find(query,callback).limit(limit);
+}

@@ -1,7 +1,18 @@
 var express = require('express');
 var router = express.Router();
-
+var Book = require('./models/book.js');
 /* GET home page. */
+router.post('/search',function(req,res){
+  var title = req.body.title;
+  Book.searchBookByName(title,function(err,books){
+    if(err)
+    throw err;
+    else{
+      res.send({books:books});
+    }
+  });
+
+});
 router.get('/', function(req, res, next) {
   var arr = []; // array of my books
   Book.getBooks(function(err, books){
@@ -74,4 +85,10 @@ router.get('/:_id', function(req, res, next) {
   });
 });
 });
+
+
+
+
+
+
 module.exports = router;

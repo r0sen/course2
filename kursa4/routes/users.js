@@ -53,6 +53,7 @@ router.get('/register', function(req, res, next) {
   res.render('signup');
 });
 
+
 router.get('/login', function(req, res, next) {
   res.render('login');
 });
@@ -108,6 +109,7 @@ console.log("HERE");
     var publisher = req.body.publisher;
     var pages = req.body.pages;
     var price = req.body.price;
+    var image_url = req.body.image_url;
     var release_date = req.body.release_date;
     var age_limit = req.body.age_limit;
     var language = req.body.language;
@@ -124,7 +126,7 @@ console.log("HERE");
     req.checkBody('release_date', 'release_date is required').notEmpty();
     req.checkBody('age_limit', 'age_limit is required').notEmpty();
     req.checkBody('language', 'language is required').notEmpty();
-
+    req.checkBody('image_url', 'image_url is required').notEmpty();
 
 console.log("HERE");
     var errors = req.validationErrors();
@@ -139,6 +141,7 @@ console.log("HERE");
         author: author,
         publisher: publisher,
         pages: pages,
+        image_url: image_url,
         price: price,
         release_date: release_date,
         age_limit: age_limit,
@@ -204,5 +207,58 @@ router.get('/adminmenu', ensureAuthenticated, function(req, res, next) {
 
      else res.render('error');
 
+});
+router.post('/adminmenu/delete',ensureAuthenticated, function(req, res){
+	var id = req.body.id;
+  console.log(id);
+	Book.removeBook(id, function(err, book){
+		if(err){
+			res.render("error");
+      return;
+		}
+    res.redirect('/users/adminmenu');
+		//res.json(book);
+	});
+});
+
+
+router.post('/adminmenu/update',ensureAuthenticated, function(req, res){
+	var id = req.body.id;
+  console.log(id);
+    console.log("HERE");
+  Book.getBookById(id, function(err, book){
+        console.log("HERE");
+    if (err){
+			res.render("error");
+      return;
+
+  }
+else{
+book.title = req.body.title || book.title;
+book.genre = req.body.genre || book.genre;
+book.description = req.body.description || book.description;
+book.author = req.body.author || book.author;
+book.publisher = req.body.publisher || book.publisher;
+book.pages = req.body.pages || book.pages;
+book.image_url = req.body.image_url || book.image_url;
+book.price = req.body.price || book.price;
+book.release_date = req.body.release_date || book.release_date;
+book.age_limit = req.body.age_limit || book.age_limit;
+book.language = req.body.language || book.language;
+
+Book.updateBook(id, book, {}, function(err, book){
+  if(err){
+			res.render("error");
+      return;
+  }
+    res.redirect('/users/adminmenu');
+
+});
+}
+
+
+
+		//res.json(book);
+	});
 });
 module.exports = router;

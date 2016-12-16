@@ -5,6 +5,34 @@
   <link rel="stylesheet" href="../css/index.css">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
+  <script src="../javascripts/jquery-3.1.1.min.js"></script>
+  <script>
+  $(document).ready(function(){
+      $("#seachCLick").on("click",function(e){
+        e.preventDefault();
+        var srchVal = $(".searchValue").val();
+        var book = {title:srchVal};
+        console.log(book);
+        $.ajax({
+          url:'/search',
+          method:'post',
+          contentType : 'application/json',
+          data:JSON.stringify(book),
+          success : function(response)
+          {
+            $("#products").html('');
+            for(var i  =0;i<response.books.length;i++){
+              $("#products").append('<div class="product"><a href="/'+response.books[i]._id+'" class="productLink">\
+              <img class="imgLink" alt="'+response.books[i].title+'" src="'+response.books[i].image_url+'" width="85%" lenght="85%">\
+              '+response.books[i].title+'</a></div>')
+
+
+            }
+          }
+        });
+
+      });
+    });</script>
   <title>Bookstore</title>
  </head>
  <body>
@@ -36,9 +64,10 @@
 </div>
 <div class="content">
   <div class="left-toolbar">
-    <div id="search"><form>
-   <input type="search" name="Search" placeholder="Search">
-   <input type="submit" value="Search"></div>
+
+    <div id="search">
+   <input class="searchValue" type="search" name="Search" placeholder="Search">
+   <a href="#" id="seachCLick"  value="Search">Search</a>
   </div>
   <div id="products">
     <% for (let i = 0; i < arr.length; i++) {  %>
