@@ -71,7 +71,7 @@ app.use(function (req, res, next){
 
 
 //---------------------------------------------------------------------------------------
-mongoose.connect('mongodb://localhost/bookie');
+mongoose.connect('mongodb://admin:admin@ds013216.mlab.com:13216/heroku_klx5tftb');
 var db = mongoose.connection;
 
 
