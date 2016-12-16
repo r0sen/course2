@@ -71,7 +71,7 @@ app.use(function (req, res, next){
 
 
 //---------------------------------------------------------------------------------------
-mongoose.connect('mongodb://admin:admin@ds013216.mlab.com:13216/heroku_klx5tftb');
+mongoose.connect('mongodb://heroku_pkmtv3fc:vjefq1ga4gmekps15lh1s39ss1@ds013216.mlab.com:13216/heroku_pkmtv3fc');
 var db = mongoose.connection;
 
 
