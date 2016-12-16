@@ -50,12 +50,12 @@ function ensureAuthenticated(req, res, next){
 
 //**********************************************
 router.get('/register', function(req, res, next) {
-  res.render('signup');
+  res.render('signup',{csrfToken:req.csrfToken()});
 });
 
 
 router.get('/login', function(req, res, next) {
-  res.render('login');
+  res.render('login',{csrfToken:req.csrfToken()});
 });
 
 router.get('/profile', ensureAuthenticated, function(req, res, next) {
@@ -92,7 +92,7 @@ router.post('/register', function(req, res) {
       });
 
       User.createUser(newUser, function(err, user){
-        if(err) throw err;
+        if(err) res.redirect('signup');
         console.log(user);
       });
 
@@ -203,8 +203,8 @@ router.get('/adminmenu', ensureAuthenticated, function(req, res, next) {
   //  console.log(req.user);
   if (req.user.admin == true){
 //  console.log("HERE2");
-    res.render('adminmenu');}
-
+    res.render('adminmenu',{csrfToken:req.csrfToken()});
+}
      else res.render('error');
 
 });

@@ -26,6 +26,8 @@ var session = require("express-session");
 var users = require('./routes/users');
 
 
+
+
 app.use(session({
   secret: 'dafnie',
   saveUninitialized: true,
@@ -34,6 +36,9 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+var csrf = require('csurf');
+var csrfProtection = csrf({cookie:true});
 
 app.use(expressValidator({
   errorFormatter: function(param, msg, value) {
@@ -89,7 +94,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/users', csrfProtection, users);
 app.use('/api', api);
 //----------------------------------------------------------
 //app.get('/', function(req, res) {

@@ -64,7 +64,7 @@
     						<label>Language :</label>
     						<input type="text" name="language" placeholder="Language" required />
     				</li>
-
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <li>
             	<button class="submit" type="submit">Add Book</button>
             </li>
@@ -110,7 +110,7 @@
                 <label>Book ID:</label>
                 <input type="text" name="id" placeholder="Book ID" required />
             </li>
-
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <li>
               <button class="submit" type="submit">Delete Book</button>
             </li>
@@ -174,7 +174,7 @@
             <label>Language :</label>
             <input type="text" name="language" placeholder="Language"  />
         </li>
-
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <li>
           <button class="submit" type="submit">Update Book</button>
         </li>

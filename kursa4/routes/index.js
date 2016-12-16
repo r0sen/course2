@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Book = require('./models/book.js');
+
+//router.use(csrfProtection);
 /* GET home page. */
 router.post('/search',function(req,res){
   var title = req.body.title;
@@ -35,6 +37,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/signup', function(req, res, next) {
+
   res.render('signup');
 });
 
