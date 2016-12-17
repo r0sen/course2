@@ -5,7 +5,7 @@ var LocalStrategy  = require('passport-local').Strategy;
 //***********************************UPLOAD
 var path = require('path');
 var multer  = require('multer');
-
+/*
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './public/pics/avatars/')
@@ -18,14 +18,23 @@ var storage = multer.diskStorage({
 
 
 
-var avatar = multer({ storage: storage });
+var avatar = multer({ storage: storage });*/
+
+
+var avatar = multer({ inMemory: true,
+                     storage: multer.memoryStorage({}) });
+
+
+
+
+
 
 
 
 router.post('/profile', ensureAuthenticated, avatar.single('avatar'), function (req, res, next) {
   User.getUserById(req.user.id, function(err, myuser) {
     if (err) throw err;
-    myuser.avatar = req.file.filename;
+  myuser.avatar = req.file.buffer.toString('base64');
     //console.log(myuser.avatar);
     User.updateUser(req.user.id, myuser, {}, function(err, mynewuser){
       if(err) throw err;
