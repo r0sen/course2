@@ -46,10 +46,7 @@ module.exports.updateUser = function(id, user, options, callback){
   User.findOneAndUpdate(query, update, options, callback);
 };
 
-module.exports.deleteDrug = function(id, callback){
-  var query = {_id: id};
-  User.remove(query, callback);
-};
+
 
 module.exports.getUserByUsername = function(username, callback){
   var query = {username: username};
