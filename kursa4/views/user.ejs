@@ -17,9 +17,9 @@
        <div id="user"><img class="avatarImg" alt='avatar' src="data:image/jpg;base64, <%= user.avatar %>" width="200px" lenght="200px"></div>
         <p>First name: <%= user.firstname %><br>Last name: <%= user.lastname %></p>
        <p id="user">Username: <%= user.username %><br>E-mail: <%= user.email %><br>
-       <form enctype="multipart/form-data" method="post">
+       <form action='?_csrf=<%=csrfToken%>' enctype="multipart/form-data" method="post">
           <p>Upload avatar (format .jpeg)<br><input type="file" name="avatar" accept="image/jpeg"><br>
-                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
           <input type="submit" value="Submit"></p>
        </form>
        <% if(user.admin == true){%>
