@@ -8,7 +8,7 @@ var userSchema = new mongoose.Schema( {
   email: { type: String },
   password: { type: String },
   admin: { type: Boolean },
-  avatar: { type: Buffer  }
+  avatar: { type: Buffer }
 }, {
     versionKey: false // You should be aware of the outcome after set to false
 });

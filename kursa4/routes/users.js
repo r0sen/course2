@@ -59,7 +59,7 @@ router.get('/login', function(req, res, next) {
 });
 
 router.get('/profile', ensureAuthenticated, function(req, res, next) {
-    res.render('user');
+    res.render('user',{csrfToken:req.csrfToken()});
 });
 router.post('/register', function(req, res) {
     var firstname = req.body.firstname;
