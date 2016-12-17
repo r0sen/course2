@@ -8,7 +8,7 @@ var multer  = require('multer');
 
 
 
-var storage = multer.diskStorage({
+/*var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './public/pics/users/')
   },
@@ -20,7 +20,10 @@ var storage = multer.diskStorage({
 
 
 
-var avatar = multer({ storage: storage });
+var avatar = multer({ storage: storage });*/
+
+var avatar = multer({ inMemory: true,
+                     storage: multer.memoryStorage({}) });
 
 
 
@@ -29,8 +32,8 @@ var avatar = multer({ storage: storage });
 router.post('/account', ensureAuthenticated, avatar.single('avatar'), function (req, res, next) {
   User.getUserById(req.user.id, function(err, myuser) {
     if (err) throw err;
-    myuser.avatar = req.file.filename;
-    console.log(myuser.avatar);
+  myuser.avatar = req.file.buffer.toString('base64');
+    //console.log(myuser.avatar);
   //console.log('_______________________HERE----------------------------------------------------------------');
     User.updateUser(req.user.id, myuser, {}, function(err, mynewuser){
       if(err) throw err;

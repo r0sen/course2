@@ -14,7 +14,7 @@
    <div class="Content">
      <div id="currentUser">
 
-       <div id="user"><img class="avatarImg" alt='avatar' src="../pics/avatars/<%= user.avatar %>" width="200px" lenght="200px"></div>
+       <div id="user"><img class="avatarImg" alt='avatar' src="data:image/jpg;base64, <%= user.avatar %>" width="200px" lenght="200px"></div>
         <p>First name: <%= user.firstname %><br>Last name: <%= user.lastname %></p>
        <p id="user">Username: <%= user.username %><br>E-mail: <%= user.email %><br>
        <form enctype="multipart/form-data" method="post">
